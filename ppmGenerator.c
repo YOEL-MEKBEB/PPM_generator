@@ -146,7 +146,7 @@ int main() {
     printf("example of txt file: imsize 256 256 type diagonalGrad\n");
 
     while(1){
-        printf("Enter name of file: ");
+        printf("Enter name of file(type q to quit): ");
         scanf("%s", buf);
         if(strcmp(buf, "q") == 0){
             printf("quiting...\n");
