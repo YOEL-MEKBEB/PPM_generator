@@ -1,1 +1,1 @@
-imsize 256 256 type horizontalGrad
+imsize 256 256 type diagonalGrad
