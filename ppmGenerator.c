@@ -238,8 +238,6 @@ int main() {
             return 1;
         }
 
-        
-
         char *token = strtok(buf2, delimiter);
         if(strcmp(token, "imsize") != 0){
             printf("invalid text format\n");
@@ -272,6 +270,7 @@ int main() {
             return 1;
 
         }
+
         // calls the appropriate functions depending on txt file structure
         if(strcmp(type, "diagonalGrad") == 0){
             if(writeDiagonalGradient(ppmFile, width, height) == -1){
@@ -279,22 +278,19 @@ int main() {
                 printf("writeDiagonalGradient failed\n");
                 return 1;
             }
-        }else if (strcmp(type, "rand") == 0)
-        {
+        }else if (strcmp(type, "rand") == 0){
             if(writeRandomBody(ppmFile, width, height)==-1){
                 fclose(ppmFile);
                 printf("writeRandomBody failed\n");
                 return 1;
             }
-        }else if (strcmp(type, "horizontalGrad") == 0)
-        {
+        }else if (strcmp(type, "horizontalGrad") == 0){
             if(writeHorizontalGradient(ppmFile, width, height) == -1){
                 fclose(ppmFile);
                 printf("writeHorizontalGradient failed\n");
                 return 1;
             }
-        }else if (strcmp(type, "verticalGrad") == 0)
-        {
+        }else if (strcmp(type, "verticalGrad") == 0){
             if(writeVerticalGradient(ppmFile, width, height) == -1){
                 fclose(ppmFile);
                 printf("writeVerticalGradient failed\n");
@@ -302,7 +298,6 @@ int main() {
             }
         }
         
-
         fclose(ppmFile);
 
     }
