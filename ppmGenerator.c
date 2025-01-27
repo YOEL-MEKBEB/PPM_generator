@@ -157,9 +157,9 @@ int writeDiagonalGradient(FILE* file, char* width, char* height){
         for(int j = 0; j < 3 * numWidth; j++){
             // this method ensures that the pixel color value doesn't exceed 255
             if(i>=j/3){
-                imageArray[i][j] = (int)(yScalingFactor * i);
+                imageArray[i][j] = 255 - (int)(yScalingFactor * i);
             }else{
-                imageArray[i][j] = (int)(xScalingFactor* j/3);
+                imageArray[i][j] = 255 - (int)(xScalingFactor* j/3);
             }
             
         }
