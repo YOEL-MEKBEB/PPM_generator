@@ -37,26 +37,25 @@ int writeRandomBody(FILE* file, char* width, char* height){
         int num;
         char numChar[5];
 
-        // j < 3 * numWidth-1 because each pixel will have 3 number associated with it
-        // and the the last pixel will have newline concatenated instead of space.
-        for(int j = 0; j < 3 * numWidth-1; j++){
+        // j < 3 * numWidth because each pixel will have 3 number associated with it
+        for(int j = 0; j < 3 * numWidth; j++){
             num = rand()%256; // 0 to 2555
-            if(sprintf(numChar, "%d ", num) == -1){
-                printf("sprintf failed in writeRandomBody\n");
-                return -1;
+            // limit the number of character used
+            if(j%15 == 0){
+                if(sprintf(numChar, "%d\n", num) == -1){
+                    printf("sprintf failed in writeRandomBody\n");
+                    return -1;
+                }
+            }else{
+                if(sprintf(numChar, "%d ", num) == -1){
+                    printf("sprintf failed in writeRandomBody\n");
+                    return -1;
+                }
             }
             if(fwrite(numChar, strlen(numChar), 1, file) < 1){
                 perror("failed to write in writeRandomBody\n");
                 return -1; 
             }
-        }
-        if(sprintf(numChar, "%d\n", num) == -1){
-            printf("sprintf failed in writeRandomBody\n");
-            return -1;
-        }
-        if(fwrite(numChar, strlen(numChar), 1, file) < 1){
-                perror("failed to write in writeRandomBody\n");
-                return -1; 
         }
     }
     return 0;
@@ -75,28 +74,25 @@ int writeHorizontalGradient(FILE* file, char* width, char* height){
         char numChar[5];
 
         // j < 3 * numWidth-1 because each pixel will have 3 number associated with it
-        // and the the last pixel will have newline concatenated instead of space.
-        for(int j = 0; j < 3 * numWidth-1; j++){
+        for(int j = 0; j < 3 * numWidth; j++){
             num = j/3;
-            if(sprintf(numChar, "%d ", num) == -1){
-                printf("sprintf failed in writeHorizontalGradient\n");
-                return -1;
+            // limit the number of character used
+            if(j%15 == 0){
+                if(sprintf(numChar, "%d\n", num) == -1){
+                    printf("sprintf failed in writeHorizontalGradient\n");
+                    return -1;
+                }
+            }else{
+                if(sprintf(numChar, "%d ", num) == -1){
+                    printf("sprintf failed in writeHorizontalGradient\n");
+                    return -1;
+                }
             }
+            
             if(fwrite(numChar, strlen(numChar), 1, file) < 1){
                 perror("failed to write in writeHorizontalGradient\n");
                 return -1;  
             }
-        }
-        num++;
-
-        if(sprintf(numChar, "%d\n", num)==-1){
-            printf("sprintf failed in writeHorizontalGradient\n");
-            return -1;
-        }
-
-        if(fwrite(numChar, strlen(numChar), 1, file) < 1){
-                perror("failed to write in writeHorizontalGradient\n");
-                return -1;  
         }
     }
     return 0;
@@ -115,26 +111,25 @@ int writeVerticalGradient(FILE* file, char* width, char* height){
         char numChar[5];
 
         // j < 3 * numWidth-1 because each pixel will have 3 number associated with it
-        // and the the last pixel will have newline concatenated instead of space.
-        for(int j = 0; j < 3 * numWidth-1; j++){
+        for(int j = 0; j < 3 * numWidth; j++){
             num = i;
-            if(sprintf(numChar, "%d ", num) == -1){
-            printf("sprintf failed in writeVerticalGradient\n");
-            return -1;
-        }
+            // limit the number of character used
+            if(j%15 == 0){
+                if(sprintf(numChar, "%d\n", num) == -1){
+                    printf("sprintf failed in writeVerticalGradient\n");
+                    return -1;
+                }
+            }else{
+                if(sprintf(numChar, "%d ", num) == -1){
+                    printf("sprintf failed in writeVerticalGradient\n");
+                    return -1;
+                }
+            }
+            
             if(fwrite(numChar, strlen(numChar), 1, file) < 1){
                 perror("failed to write in writeVerticalGradient\n");
                 return -1;  
             }
-        }
-        num++;
-        if(sprintf(numChar, "%d\n", num) == -1){
-            printf("sprintf failed in writeVerticalGradient\n");
-            return -1;
-        }
-        if(fwrite(numChar, strlen(numChar), 1, file) < 1){
-                perror("failed to write in writeVerticalGradient\n");
-                return -1;  
         }
     }
     return 0;
@@ -177,12 +172,20 @@ int writeDiagonalGradient(FILE* file, char* width, char* height){
         num = i;
 
         // j < 3 * numWidth-1 because each pixel will have 3 number associated with it
-        // and the the last pixel will have newline concatenated instead of space.
-        for(int j = 0; j < 3 * numWidth-1; j++){
+        for(int j = 0; j < 3 * numWidth; j++){
             num = imageArray[i][j];
-            if(sprintf(numChar, "%d ", num) == -1){
-                printf("sprintf failed in writeDiagonalGradient\n");
-                return -1;
+
+            // limit the number of character used
+            if(j%15 == 0){
+                if(sprintf(numChar, "%d\n", num) == -1){
+                    printf("sprintf failed in writeDiagonalGradient\n");
+                    return -1;
+                }
+            }else{
+                if(sprintf(numChar, "%d ", num) == -1){
+                    printf("sprintf failed in writeDiagonalGradient\n");
+                    return -1;
+                }
             }
             if(fwrite(numChar, strlen(numChar), 1, file) < 1){
                 perror("failed to write in writeDiagonalGradient\n");
@@ -190,18 +193,8 @@ int writeDiagonalGradient(FILE* file, char* width, char* height){
             }
             
         }
-        num = imageArray[i][3 * numWidth-1];
-        if(sprintf(numChar, "%d\n", num) == -1){
-            printf("sprintf failed in writeDiagonalGradient\n");
-            return -1;
-        }
-        if(fwrite(numChar, strlen(numChar), 1, file) < 1){
-                perror("failed to write in writeDiagonalGradient\n");
-                return -1;  
-        }
        
      } 
-
     
     return 0;
 }
